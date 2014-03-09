@@ -1,7 +1,9 @@
 Router.configure({
   layoutTemplate: 'layout',
   loadingTemplate: 'loading',
-  waitOn: function() { return Meteor.subscribe('posts'); }
+  waitOn: function() {
+    return [Meteor.subscribe('posts'), Meteor.subscribe('comments')];
+  }
 });
 
 Router.map(function() {
@@ -34,5 +36,5 @@ var requireLogin = function() {
 }
 
 Router.before(requireLogin, {only: 'postSubmit'});
-Router.before(function() { clearErrors() });
+// Router.before(function() { clearErrors() });
 

@@ -17,4 +17,13 @@ Router.map(function() {
   });
 });
 
+var requireLogin = function() {
+  if (! Meteor.user()) {
+    this.render('accessDenied');
+    this.stop();
+  }
+}
+
+Router.before(requireLogin, {only: 'postSubmit'});
+
 
